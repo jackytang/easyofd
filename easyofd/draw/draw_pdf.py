@@ -177,6 +177,8 @@ class DrawPDF():
 
                 }
 
+                resizeX = CTM_info["resizeX"]
+                resizeY = CTM_info["resizeY"]
             else:
                 CTM_info ={}
             x_list = self.cmp_offset(line_dict.get("pos")[0], X, DeltaX, text, CTM_info, dire="X")
