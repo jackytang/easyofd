@@ -280,7 +280,18 @@ class OFDParser(object):
             img_info = DocumentResFileParser(document_res_xml_obj)()
             # 找到图片b64
             for img_id, img_v in img_info.items():
-                img_v["imgb64"] = self.get_xml_obj(img_v.get("fileName"))
+                file_name = img_v.get("fileName")
+                if not file_name:
+                    logger.warning(f"图片资源缺少 fileName：{img_v}")
+                    img_v["imgb64"] = ""
+                    continue
+
+                img_v["imgb64"] = self.get_xml_obj(file_name)
+                if not img_v["imgb64"]:
+                    logger.warning(f"未找到图片资源 {file_name}")
+                    continue
+
+                # img_v["imgb64"] = self.get_xml_obj(img_v.get("fileName"))
                 # todo ib2 转png C:/msys64/mingw64/bin/jbig2dec.exe -o F:\code\easyofd\test\image_80.png F:\code\easyofd\test\image_80.jb2
                 if img_v["suffix"] == 'jb2':
                     self.jb22png(img_v)
