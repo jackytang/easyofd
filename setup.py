@@ -20,7 +20,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[   ### 依赖包
-        "reportlab>=3.6.11",
+        "reportlab>=3.6.13",
         "xmltodict>=0.13.0",
         "loguru>=0.7.2",
         "fontTools>=4.43.1",
