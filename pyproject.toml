@@ -1,8 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "easyofd"
-version = "0.1.0"
-description = "Add your description here"
+# 注意：我这里填了0.5.6（参考了你之前的报错日志），如果不对请手动改为 __version__ 的真实值
+version = "0.5.6"
+description = "easy operate OFD"
+readme = "README.md"
 requires-python = ">=3.11"
+authors = [
+    { name = "renoyuan", email = "renoyuan@foxmail.com" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "fonttools==4.43.1",
     "loguru==0.7.2",
@@ -11,3 +25,6 @@ dependencies = [
     "reportlab==3.6.13",
     "xmltodict==0.13.0",
 ]
+# 这一段对应 setup.py 里的 find_packages(exclude=...)
+[tool.setuptools.packages.find]
+exclude = ["README.md", ".vscode", ".vscode.*", ".git", ".git.*"]

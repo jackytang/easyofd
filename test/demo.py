@@ -52,18 +52,18 @@ def test_ofd2(file_path):
     with open(file_path, "rb") as f:
         ofdb64 = str(base64.b64encode(f.read()), "utf-8")
     ofd = OFD()  # 初始化OFD 工具类
-    ofd.read(ofdb64, save_xml=True, xml_name=f"{file_prefix}_xml")  # 读取ofdb64
+    ofd.read(ofdb64, save_xml=False, xml_name=f"{file_prefix}_xml")  # 读取ofdb64
     # print("ofd.data", ofd.data) # ofd.data 为程序解析结果
     pdf_bytes = ofd.to_pdf()  # 转pdf
     img_np = ofd.to_jpg()  # 转图片
     ofd.del_data()
 
-    with open(f"{file_prefix}.pdf", "wb") as f:
+    with open(f"data\\{file_prefix}.pdf", "wb") as f:
         f.write(pdf_bytes)
 
     for idx, img in enumerate(img_np):
         # im = Image.fromarray(img)
-        img.save(f"{file_prefix}_{idx}.jpg")
+        img.save(f"data\\{file_prefix}_{idx}.jpg")
 
 
 def test_pdf2(file_path):
@@ -86,16 +86,18 @@ def test_pdf2(file_path):
 
 if __name__ == "__main__":
 
-    file_path = rf"F:\opensource\easyofd\test\data\滴滴电子发票C.ofd"
+    file_path = rf"data\3.ofd"
     # file_path = r"data/2.ofd"
-    if sys.argv[1] == "ofd2":
-        test_ofd2(file_path)
-    elif sys.argv[1] == "pdf2":
-        test_pdf2(file_path)
-    elif sys.argv[1] == "img2":
-        test_img2(file_path)
-    else:
-        test_ofd2(file_path)
+    # if sys.argv[1] == "ofd2":
+    #     test_ofd2(file_path)
+    # elif sys.argv[1] == "pdf2":
+    #     test_pdf2(file_path)
+    # elif sys.argv[1] == "img2":
+    #     test_img2(file_path)
+    # else:
+    #     test_ofd2(file_path)
+
+    test_ofd2(file_path)
 
     # data = ofd.data
     # json.dump(data,open("data.json","w",encoding="utf-8"),ensure_ascii=False,indent=4)
